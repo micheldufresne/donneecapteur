@@ -9,10 +9,10 @@ class Queue
 public:
     // Constructeur : taille + valeur initiale
     Queue(size_t capacity, const T &vdepart)
-        : _capacity(capacity), _front(0), _rear(0), _size(capacity)
+        : _capacite(capacity), _indDebut(0), _indFin(0), _taille(capacity)
     {
-        _buffer = new T[_capacity];
-        for (size_t i = 0; i < _capacity; i++)
+        _buffer = new T[_capacite];
+        for (size_t i = 0; i < _capacite; i++)
         {
             _buffer[i] = vdepart;
         }
@@ -27,44 +27,44 @@ public:
     // Ajout en fin
     bool push(const T &item)
     {
-        if (isFull())
+        if (estPleine())
             return false;
-        _buffer[_rear] = item;
-        _rear = (_rear + 1) % _capacity;
-        _size++;
+        _buffer[_indFin] = item;
+        _indFin = (_indFin + 1) % _capacite;
+        _taille++;
         return true;
     }
 
     // Retrait du premier élément
     bool pop(T &out)
     {
-        if (isEmpty())
+        if (estVide())
             return false;
-        out = _buffer[_front];
-        _front = (_front + 1) % _capacity;
-        _size--;
+        out = _buffer[_indDebut];
+        _indDebut = (_indDebut + 1) % _capacite;
+        _taille--;
         return true;
     }
 
     // Lecture du premier élément
     bool peek(T &out) const
     {
-        if (isEmpty())
+        if (estVide())
             return false;
-        out = _buffer[_front];
+        out = _buffer[_indDebut];
         return true;
     }
 
     // Réinitialise la file
     void remplir(const T &vdepart)
     {
-        for (size_t i = 0; i < _capacity; i++)
+        for (size_t i = 0; i < _capacite; i++)
         {
             _buffer[i] = vdepart;
         }
-        _front = 0;
-        _rear = 0;
-        _size = _capacity;
+        _indDebut = 0;
+        _indFin = 0;
+        _taille = _capacite;
     }
 
     // --- Méthodes statistiques ---
@@ -73,25 +73,25 @@ public:
     double moyenne() const
     {
         static_assert(std::is_arithmetic<T>::value, "moyenne() requiert un type numérique");
-        if (isEmpty())
+        if (estVide())
             return 0.0;
         double somme = 0;
-        for (size_t i = 0; i < _capacity; i++)
+        for (size_t i = 0; i < _capacite; i++)
         {
             somme += static_cast<double>(_buffer[i]);
         }
-        return somme / static_cast<double>(_capacity);
+        return somme / static_cast<double>(_capacite);
     }
 
     // Écart entre le max et le min
     double ecart() const
     {
         static_assert(std::is_arithmetic<T>::value, "ecart() requiert un type numérique");
-        if (isEmpty())
+        if (estVide())
             return 0.0;
         T minVal = _buffer[0];
         T maxVal = _buffer[0];
-        for (size_t i = 1; i < _capacity; i++)
+        for (size_t i = 1; i < _capacite; i++)
         {
             if (_buffer[i] < minVal)
                 minVal = _buffer[i];
@@ -105,37 +105,37 @@ public:
     double ecartType() const
     {
         static_assert(std::is_arithmetic<T>::value, "ecartType() requiert un type numérique");
-        if (isEmpty())
+        if (estVide())
             return 0.0;
 
         double moy = moyenne();
         double sommeCarres = 0;
-        for (size_t i = 0; i < _capacity; i++)
+        for (size_t i = 0; i < _capacite; i++)
         {
             double diff = static_cast<double>(_buffer[i]) - moy;
             sommeCarres += diff * diff;
         }
-        return sqrt(sommeCarres / static_cast<double>(_capacity));
+        return sqrt(sommeCarres / static_cast<double>(_capacite));
     }
 
     // Accesseurs d’état
-    bool isEmpty() const {
-        return _size == 0; 
+    bool estVide() const {
+        return _taille == 0; 
     }
-    bool isFull() const {
-        return _size == _capacity; 
+    bool estPleine() const {
+        return _taille == _capacite; 
     }
-    size_t size() const {
-        return _size; 
+    size_t getTailleActu() const {
+        return _taille; 
     }
-    size_t capacity() const {
-        return _capacity; 
+    size_t getTailleMax() const {
+        return _capacite; 
     }
 
 private:
     T *_buffer;
-    size_t _capacity;
-    size_t _front;
-    size_t _rear;
-    size_t _size;
+    size_t _capacite;
+    size_t _indDebut;
+    size_t _indFin;
+    size_t _taille;
 };
