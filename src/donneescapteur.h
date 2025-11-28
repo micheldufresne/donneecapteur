@@ -51,7 +51,17 @@ public:
         _i=0;
     }
 
-    // --- Méthodes statistiques ---
+    //Max
+    T max() const
+    {
+        T maxVal = _buffer[0];
+        for (size_t i = 1; i < _capacite; i++)
+        {
+            if (_buffer[i] > maxVal)
+                maxVal = _buffer[i];
+        }
+        return maxVal;
+    }
 
     // Moyenne
     double moyenne() const
