@@ -1,10 +1,9 @@
 #include "donneescapteur.h"
 #include "arduinoOTA.h"
-#define passwordOTA "tarte"
+#include "config.h"
 const char *hostName = "essai";
 TabLastData<uint16_t> mesures(10, 0); // Tableau de 10 float, rempli avec 0
-const char *ssid = "piron";           // Enter SSID here
-const char *password = "Sivispacemparabellum60"; // Enter Password here
+
 
 void initOTA()
 {
