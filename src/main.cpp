@@ -20,6 +20,7 @@ void demandeOTA()
 
 void testWifiOk()
 {
+  //le wifi est-il accessible ? sinon reboot
   uint8_t nbEssais = 0;
   while (WiFi.status() != WL_CONNECTED)
   {
