@@ -42,7 +42,7 @@ void setupwifi()
 void setup()
 {
   Serial.begin(115200);
-  Serial.println("Test de l'utilisation de donneecapteur");
+
   //mesures.remplir(2u);
   mesures.push(3);
   mesures.push(4);
