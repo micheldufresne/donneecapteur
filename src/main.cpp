@@ -1,6 +1,9 @@
 #include "donneescapteur.h"
 #include "arduinoOTA.h"
 #include "config.h"
+//#define passwordOTA ""
+//const char *ssid = "";                      // Enter SSID here
+//const char *password = "";                // Enter Password here
 const char *hostName = "essai";
 TabLastData<uint16_t> mesures(10, 0); // Tableau de 10 float, rempli avec 0
 
@@ -63,6 +66,7 @@ void setup()
   Serial.print("Ecart type : ");
   Serial.println(mesures.ecartType(), 3);
   setupwifi();
+  Serial.println("Fin du setup");
 }
 
 void loop() {

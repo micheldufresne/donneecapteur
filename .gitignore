@@ -1,5 +1,5 @@
 .pio
 .vscode
-include
+include/config.h
 lib
 test
