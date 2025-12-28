@@ -66,7 +66,6 @@ void setup()
   Serial.print("Ecart type : ");
   Serial.println(mesures.ecartType(), 3);
   setupwifi();
-  Serial.println("Fin du setup");
 }
 
 void loop() {
