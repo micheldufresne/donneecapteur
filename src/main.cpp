@@ -1,9 +1,6 @@
 #include "donneescapteur.h"
 #include "arduinoOTA.h"
 #include "config.h"
-//#define passwordOTA ""
-//const char *ssid = "";                      // Enter SSID here
-//const char *password = "";                // Enter Password here
 const char *hostName = "essai";
 TabLastData<uint16_t> mesures(10, 0); // Tableau de 10 float, rempli avec 0
 
@@ -12,7 +9,7 @@ void initOTA()
 {
   ArduinoOTA.setHostname(hostName);
   ArduinoOTA.setPort(3232);
-  ArduinoOTA.setPassword(passwordOTA);
+  ArduinoOTA.setPassword(PASSWORD_OTA);
 }
 
 void demandeOTA()
@@ -36,7 +33,7 @@ void testWifiOk()
 
 void setupwifi()
 {
-  WiFi.begin(ssid, password);
+  WiFi.begin(SSID_WIFI, PASSWORD_WIFI);
 
   // check wi-fi is connected to wi-fi network
   testWifiOk();
